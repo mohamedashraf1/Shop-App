@@ -10,9 +10,7 @@ class AppDrawer extends StatelessWidget {
         children: [
           AppBar(
             title: Text("Hello Friend!"),
-            automaticallyImplyLeading: false,
-
-            /// never display back buttom
+            automaticallyImplyLeading: false, // never display back buttom
           ),
           Divider(),
           ListTile(
