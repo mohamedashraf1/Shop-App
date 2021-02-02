@@ -21,7 +21,7 @@ class Product with ChangeNotifier {
     this.isFavorite = false,
   });
 
-  Future<void> toggleFavoriteStatus(String id) async {
+  Future<void> toggleFavoriteStatus() async {
     final url =
         'https://shop-app-ac3be-default-rtdb.firebaseio.com/products/$id.json';
 
@@ -29,7 +29,7 @@ class Product with ChangeNotifier {
     notifyListeners();
     final response =
         await http.patch(url, body: json.encode({'isFavorite': isFavorite}));
-    if (response.statusCode > 400) {
+    if (response.statusCode >= 400) {
       isFavorite = !isFavorite;
       notifyListeners();
       throw HttpException("something went wron!");
