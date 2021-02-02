@@ -6,7 +6,7 @@ import './product.dart';
 
 class Products with ChangeNotifier {
   List<Product> _items = [
-    Product(
+    /*Product(
       id: 'p1',
       title: 'Red Shirt',
       description: 'A red shirt - it is pretty red!',
@@ -37,7 +37,7 @@ class Products with ChangeNotifier {
       price: 49.99,
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Cast-Iron-Pan.jpg/1024px-Cast-Iron-Pan.jpg',
-    ),
+    ),*/
   ];
 
   // var _showFavoritesOnly = false;
@@ -62,6 +62,30 @@ class Products with ChangeNotifier {
   //   _showFavoritesOnly = false;
   //   notifyListeners();
   // }
+
+  Future<void> fetchAndSetProducts() async {
+    const url =
+        'https://shop-app-ac3be-default-rtdb.firebaseio.com/products.json';
+    try {
+      final response = await http.get(url);
+      final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      final List<Product> loadedProducts = [];
+      extractedData.forEach((prodId, prodData) {
+        loadedProducts.add(Product(
+          id: prodId,
+          title: prodData['title'],
+          description: prodData['description'],
+          price: prodData['price'],
+          isFavorite: prodData['isFavorite'],
+          imageUrl: prodData['imageUrl'],
+        ));
+      });
+      _items = loadedProducts;
+      notifyListeners();
+    } catch (error) {
+      throw error;
+    }
+  }
 
   Product findById(String id) {
     return _items.firstWhere((element) => element.id == id);
