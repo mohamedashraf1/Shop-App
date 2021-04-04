@@ -32,7 +32,7 @@ class Product with ChangeNotifier {
     if (response.statusCode >= 400) {
       isFavorite = !isFavorite;
       notifyListeners();
-      throw HttpException("something went wron!");
+      throw HttpException("something went wrong!");
     }
   }
 }
