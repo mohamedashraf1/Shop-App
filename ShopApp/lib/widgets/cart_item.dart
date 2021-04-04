@@ -32,13 +32,13 @@ class CartItem extends StatelessWidget {
             title: Text('Confirm deletion'),
             content: Text("do you want to remove the item from the cart?"),
             actions: [
-              FlatButton(
+              TextButton(
                 onPressed: () {
                   Navigator.of(context).pop(false);
                 },
                 child: Text("No"),
               ),
-              FlatButton(
+              TextButton(
                 onPressed: () {
                   Navigator.of(context).pop(true);
                 },
