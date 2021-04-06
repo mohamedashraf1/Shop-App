@@ -26,8 +26,8 @@ class Orders with ChangeNotifier {
   }
 
   Future<void> fetchAndSetOrders() async {
-    final url =
-        'https://shop-app-ac3be-default-rtdb.firebaseio.com/Orders.json';
+    final url = Uri.parse(
+        'https://shop-app-ac3be-default-rtdb.firebaseio.com/Orders.json');
     final response = await http.get(url);
     final List<OrderItem> loadedOrders = [];
     final extractedData = json.decode(response.body) as Map<String, dynamic>;
@@ -55,8 +55,8 @@ class Orders with ChangeNotifier {
   }
 
   Future<void> addOrder(List<CartItem> cartProducts, double total) async {
-    final url =
-        'https://shop-app-ac3be-default-rtdb.firebaseio.com/Orders.json';
+    final url = Uri.parse(
+        'https://shop-app-ac3be-default-rtdb.firebaseio.com/Orders.json');
     final date = DateTime.now();
     final response = await http.post(url,
         body: json.encode({

@@ -22,9 +22,8 @@ class Product with ChangeNotifier {
   });
 
   Future<void> toggleFavoriteStatus() async {
-    final url =
-        'https://shop-app-ac3be-default-rtdb.firebaseio.com/products/$id.json';
-
+    final url = Uri.parse(
+        'https://shop-app-ac3be-default-rtdb.firebaseio.com/products/$id.json');
     isFavorite = !isFavorite;
     notifyListeners();
     final response =
