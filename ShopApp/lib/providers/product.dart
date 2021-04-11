@@ -21,9 +21,9 @@ class Product with ChangeNotifier {
     this.isFavorite = false,
   });
 
-  Future<void> toggleFavoriteStatus() async {
+  Future<void> toggleFavoriteStatus(String authToken) async {
     final url = Uri.parse(
-        'https://shop-app-ac3be-default-rtdb.firebaseio.com/products/$id.json');
+        'https://shop-app-ac3be-default-rtdb.firebaseio.com/products/$id.json?auth=$authToken');
     isFavorite = !isFavorite;
     notifyListeners();
     final response =
